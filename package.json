@@ -1,0 +1,24 @@
+{
+  "name": "jwt-next-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "isomorphic-unfetch": "^3.0.0",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "next": "^9.1.6",
+    "next-cookies": "^2.0.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
