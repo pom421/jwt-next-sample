@@ -1,6 +1,6 @@
-
-import React, {useRef, useState} from "react"
+import React from "react"
 import Link from "next/link"
+import nextCookies from "next-cookies"
 import fetch from "isomorphic-unfetch"
 
 const URL_CHECK_TOKEN = "http://localhost:3001/api/check"
@@ -20,15 +20,25 @@ const HomePage = ({error}) => {
     )
 }
 
+const isSSR = ctx => ctx && ctx.req
+
 HomePage.getInitialProps = async ctx => {
+    console.log(ctx && ctx.req ? "SSR" : "CSR")
 
-    const res = await fetch(URL_CHECK_TOKEN, {
-        method: "POST",
+    const {token} = nextCookies(ctx)
 
-    })
+    let options = {
+        method: "POST"
+    }
+
+    if (isSSR(ctx)) {
+        options = {...options,  headers: {
+            token
+        }}
+    }
+
+    const res = await fetch(URL_CHECK_TOKEN, options)
     const json = await res.json()
-
-    console.log("json", json)
 
     if (res.ok) {
         return {data: json}

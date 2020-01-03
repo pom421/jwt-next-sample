@@ -1,4 +1,3 @@
-
 import {login} from "../../services/auth"
 
 export default async (req, res) => {
