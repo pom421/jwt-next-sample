@@ -4,19 +4,25 @@ import { randomBytes } from 'crypto';
 
 import * as jwt from 'jsonwebtoken'
 
-const SECRET = 'MySuP3R_z3kr3t.'
-
-export const check = token => {
-  return jwt.verify(token, SECRET, { expiresIn: "20" });
+const jwtConfig = {
+  secret: "JHo$aY@2&o7m",
+  options: {
+    expiresIn: "1h",
+    algorithm: 'HS256',
+  }
 }
 
-export const login = (email, password) => {
+export const check = token => {
+  return jwt.verify(token, jwtConfig.secret, jwtConfig.options);
+}
+
+export const authenticate = (email, password) => {
   const generateJWT = ({id, name, email, role}) =>  jwt.sign({
         id,
         name,
         email,
         role
-    }, SECRET, { expiresIn: "1h" });
+    }, jwtConfig.secret, jwtConfig.options);
 
     // const userRecord = await UserModel.findOne({ email });
     // let userRecord = ""
@@ -28,6 +34,10 @@ export const login = (email, password) => {
     //     throw new Error('Incorrect password')
     //   }
     // }
+
+    if (false) {
+      throw new Error("Authentication error")
+    }
 
     const userRecord = {
       id: 4,
